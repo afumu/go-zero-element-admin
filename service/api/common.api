@@ -1,0 +1,22 @@
+syntax = "v1"
+
+info(
+    title: "通用参数"
+    desc: "通用参数"
+    author: "zouchangfu"
+)
+
+type Result {
+   Success bool `json:"success"`
+   Data byte `json:"data"`
+   Timestamp int64 `json:"timestamp"`
+}
+
+type FormParamId {
+     Id int64 `form:"id"`
+}
+
+type FormParamIds {
+    Ids int64 `form:"ids"`
+}
+

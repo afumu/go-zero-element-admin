@@ -1,0 +1,69 @@
+syntax = "v1"
+
+info(
+    title: "用户管理"
+    desc: "用户管理"
+    author: "zouchangfu"
+)
+
+import "common.api"
+type (
+
+   UserAddReq {
+       Username    string `json:"username"`
+       Password    string `json:"password"`
+       Realname    string `json:"realname,optional"`
+       Sex         int    `json:"sex"`
+       Avatar      string `json:"avatar,optional"`
+   }
+
+   UserEditReq {
+       Id          int64  `json:"id"`
+       Username    string `json:"username,optional"`
+       Password    string `json:"password,optional"`
+       Realname    string `json:"realname,optional"`
+       Sex         int    `json:"sex,optional"`
+       Avatar      string `json:"avatar,optional"`
+       Status      int    `json:"status,optional"`
+   }
+
+   UserResp {
+       Id          int64  `json:"id"`
+       Username    string `json:"username"`
+       Realname    string `json:"realname"`
+       Password    string `json:"password"`
+       Salt        string `json:"salt"`
+       Sex         int    `json:"sex"`
+       Avatar      string `json:"avatar"`
+       Status      int    `json:"status"`
+       Deleted     int    `json:"deleted"`
+       CreatedBy   int64  `json:"created_by"`
+       CreatedTime int64  `json:"created_time"`
+       UpdatedBy   int64  `json:"updated_by"`
+       UpdatedTime int64  `json:"updated_time"`
+   }
+)
+
+@server(
+    group:user
+)
+
+service user-api {
+    @handler list
+    get /user/list returns (Result)
+
+    @handler add
+    post /user/add (UserAddReq) returns (Result)
+
+    @handler queryById
+    get /user/queryById (FormParamId) returns (Result)
+
+    @handler edit
+    put /user/edit (UserEditReq) returns (Result)
+
+    @handler removeById
+    delete /user/removeById (FormParamId) returns (Result)
+
+    @handler removeByIds
+    delete /user/removeByIds (FormParamIds) returns (Result)
+}
