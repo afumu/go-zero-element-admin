@@ -1,6 +1,7 @@
 package user
 
 import (
+	"github.com/zouchangfu/go-zero-element-admin/common/result"
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -19,10 +20,6 @@ func QueryByIdHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := user.NewQueryByIdLogic(r.Context(), svcCtx)
 		resp, err := l.QueryById(&req)
-		if err != nil {
-			httpx.Error(w, err)
-		} else {
-			httpx.OkJson(w, resp)
-		}
+		result.HttpResult(w, r, resp, err)
 	}
 }

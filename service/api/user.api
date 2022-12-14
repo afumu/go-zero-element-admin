@@ -42,6 +42,9 @@ type (
        UpdatedBy   int64  `json:"updated_by"`
        UpdatedTime int64  `json:"updated_time"`
    }
+   UserListResp{
+     userList []*UserResp `json:"userList"`
+   }
 )
 
 @server(
@@ -50,20 +53,20 @@ type (
 
 service user-api {
     @handler list
-    get /user/list returns (Result)
+    get /user/list returns (UserResp)
 
     @handler add
-    post /user/add (UserAddReq) returns (Result)
+    post /user/add (UserAddReq)
 
     @handler queryById
-    get /user/queryById (FormParamId) returns (Result)
+    get /user/queryById (FormParamId) returns (UserResp)
 
     @handler edit
-    put /user/edit (UserEditReq) returns (Result)
+    put /user/edit (UserEditReq)
 
     @handler removeById
-    delete /user/removeById (FormParamId) returns (Result)
+    delete /user/removeById (FormParamId)
 
     @handler removeByIds
-    delete /user/removeByIds (FormParamIds) returns (Result)
+    delete /user/removeByIds (FormParamIds)
 }

@@ -2,7 +2,9 @@ package user
 
 import (
 	"context"
-
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/model"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/types"
 
@@ -23,8 +25,25 @@ func NewAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddLogic {
 	}
 }
 
-func (l *AddLogic) Add(req *types.UserAddReq) (resp *types.Result, err error) {
-	// todo: add your logic here and delete this line
+func (l *AddLogic) Add(req *types.UserAddReq) error {
+	user := &model.SysUser{}
+	if err := copier.Copy(&user, &req); err != nil {
+		return errx.NewErrCode(errx.ServerCommonError)
+	}
 
-	return
+	sqlResult, err := l.svcCtx.UserModel.Insert(l.ctx, user)
+	if err != nil {
+		return errx.NewErrCode(errx.DbError)
+	}
+
+	count, err := sqlResult.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if count == 0 {
+		return errx.NewErrCode(errx.DbUpdateAffectedError)
+	}
+
+	return nil
 }

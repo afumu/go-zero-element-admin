@@ -23,8 +23,8 @@ func NewQueryByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBy
 	}
 }
 
-func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.Result, err error) {
+func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.UserResp, err error) {
 	// todo: add your logic here and delete this line
 
-	return
+	return nil, nil
 }

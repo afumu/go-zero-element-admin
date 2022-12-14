@@ -6,12 +6,6 @@ info(
     author: "zouchangfu"
 )
 
-type Result {
-   Success bool `json:"success"`
-   Data byte `json:"data"`
-   Timestamp int64 `json:"timestamp"`
-}
-
 type FormParamId {
      Id int64 `form:"id"`
 }

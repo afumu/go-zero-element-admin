@@ -23,8 +23,8 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 	}
 }
 
-func (l *ListLogic) List() (resp *types.Result, err error) {
+func (l *ListLogic) List() (resp *types.UserListResp, err error) {
 	// todo: add your logic here and delete this line
 
-	return
+	return nil, nil
 }

@@ -35,10 +35,8 @@ type UserResp struct {
 	UpdatedTime int64  `json:"updated_time"`
 }
 
-type Result struct {
-	Success   bool  `json:"success"`
-	Data      byte  `json:"data"`
-	Timestamp int64 `json:"timestamp"`
+type UserListResp struct {
+	UserList []*UserResp `json:"userList"`
 }
 
 type FormParamId struct {

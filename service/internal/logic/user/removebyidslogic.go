@@ -23,8 +23,8 @@ func NewRemoveByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Remov
 	}
 }
 
-func (l *RemoveByIdsLogic) RemoveByIds(req *types.FormParamIds) (resp *types.Result, err error) {
+func (l *RemoveByIdsLogic) RemoveByIds(req *types.FormParamIds) error {
 	// todo: add your logic here and delete this line
 
-	return
+	return nil
 }

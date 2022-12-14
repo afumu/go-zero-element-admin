@@ -23,8 +23,8 @@ func NewEditLogic(ctx context.Context, svcCtx *svc.ServiceContext) *EditLogic {
 	}
 }
 
-func (l *EditLogic) Edit(req *types.UserEditReq) (resp *types.Result, err error) {
+func (l *EditLogic) Edit(req *types.UserEditReq) error {
 	// todo: add your logic here and delete this line
 
-	return
+	return nil
 }
