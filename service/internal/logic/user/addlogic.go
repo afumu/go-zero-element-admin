@@ -2,11 +2,13 @@ package user
 
 import (
 	"context"
+	"database/sql"
 	"github.com/jinzhu/copier"
 	"github.com/zouchangfu/go-zero-element-admin/common/errx"
 	"github.com/zouchangfu/go-zero-element-admin/model"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/types"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,6 +33,8 @@ func (l *AddLogic) Add(req *types.UserAddReq) error {
 		return errx.NewErrCode(errx.ServerCommonError)
 	}
 
+	user.CreatedTime = sql.NullTime{Time: time.Now(), Valid: true}
+	user.UpdatedTime = sql.NullTime{Time: time.Now(), Valid: true}
 	sqlResult, err := l.svcCtx.UserModel.Insert(l.ctx, user)
 	if err != nil {
 		return errx.NewErrCode(errx.DbError)

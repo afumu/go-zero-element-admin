@@ -11,7 +11,7 @@ func init() {
 	message[TokenGenerateError] = "生成token失败"
 	message[DbError] = "数据库繁忙,请稍后再试"
 	message[DbUpdateAffectedError] = "更新数据影响行数为0"
-	message[CopyerError] = "复制数据出错"
+	message[CopierError] = "复制数据出错"
 }
 
 func MapErrMsg(errcode uint32) string {

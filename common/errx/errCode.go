@@ -11,4 +11,4 @@ const TokenExpireError uint32 = 100003
 const TokenGenerateError uint32 = 100004
 const DbError uint32 = 100005
 const DbUpdateAffectedError uint32 = 100006
-const CopyerError uint32 = 100007
+const CopierError uint32 = 100007
