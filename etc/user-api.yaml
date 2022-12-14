@@ -1,0 +1,10 @@
+Name: user-api
+Host: 0.0.0.0
+Port: 8887
+Mysql:
+  DataSource: root:root-abcd-1234@tcp(127.0.0.1:3306)/zeroadmin?charset=utf8mb4&parseTime=True&loc=Local
+Log:
+  serviceName: zeroadmin
+  model: console
+  Level: info
+  Encoding: plain
