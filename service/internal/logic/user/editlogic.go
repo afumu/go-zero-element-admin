@@ -2,6 +2,9 @@ package user
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/model"
 
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/types"
@@ -24,7 +27,14 @@ func NewEditLogic(ctx context.Context, svcCtx *svc.ServiceContext) *EditLogic {
 }
 
 func (l *EditLogic) Edit(req *types.UserEditReq) error {
-	// todo: add your logic here and delete this line
+	user := model.SysUser{}
+	if err := copier.Copy(&user, &req); err != nil {
+		return errx.NewErrCode(errx.ServerCommonError)
+	}
+
+	if err := l.svcCtx.UserModel.Update(l.ctx, &user); err != nil {
+		return errx.NewErrCode(errx.DbError)
+	}
 
 	return nil
 }

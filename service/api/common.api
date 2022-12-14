@@ -11,6 +11,6 @@ type FormParamId {
 }
 
 type FormParamIds {
-    Ids int64 `form:"ids"`
+    Ids string `form:"ids"`
 }
 

@@ -44,5 +44,5 @@ type FormParamId struct {
 }
 
 type FormParamIds struct {
-	Ids int64 `form:"ids"`
+	Ids string `form:"ids"`
 }

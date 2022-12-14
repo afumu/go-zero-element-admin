@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/common/errx"
 
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/types"
@@ -24,7 +26,24 @@ func NewQueryByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBy
 }
 
 func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.UserResp, err error) {
-	// todo: add your logic here and delete this line
 
-	return nil, nil
+	sysUser, err := l.svcCtx.UserModel.FindOne(l.ctx, req.Id)
+	if err != nil {
+		return nil, errx.NewErrCode(errx.DbError)
+	}
+
+	u := types.UserResp{}
+	if err := copier.Copy(&u, &sysUser); err != nil {
+		return nil, errx.NewErrCode(errx.CopierError)
+	}
+
+	if sysUser.CreatedTime.Valid {
+		u.CreatedTime = sysUser.CreatedTime.Time.UnixMilli()
+	}
+
+	if sysUser.CreatedTime.Valid {
+		u.UpdatedTime = sysUser.UpdatedTime.Time.UnixMilli()
+	}
+
+	return &u, nil
 }

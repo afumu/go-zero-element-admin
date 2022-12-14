@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"github.com/zouchangfu/go-zero-element-admin/common/errx"
 
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/service/internal/types"
@@ -24,7 +25,8 @@ func NewRemoveByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Remov
 }
 
 func (l *RemoveByIdsLogic) RemoveByIds(req *types.FormParamIds) error {
-	// todo: add your logic here and delete this line
-
+	if err := l.svcCtx.UserModel.DeleteByIds(l.ctx, req.Ids); err != nil {
+		return errx.NewErrCode(errx.DbError)
+	}
 	return nil
 }
