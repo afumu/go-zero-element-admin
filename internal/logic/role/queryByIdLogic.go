@@ -2,6 +2,8 @@ package role
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -24,7 +26,14 @@ func NewQueryByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBy
 }
 
 func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.RoleResp, err error) {
-	// todo: add your logic here and delete this line
+	user, sqlResult := l.svcCtx.RoleDao.GetById(req.Id)
+	if sqlResult.Error != nil {
+		return nil, errx.NewErrCode(errx.DbError)
+	}
 
-	return
+	roleResp := types.RoleResp{}
+	if err := copier.Copy(&roleResp, &user); err != nil {
+		return nil, errx.NewErrCode(errx.DbError)
+	}
+	return &roleResp, nil
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/utils"
 	"github.com/zouchangfu/go-zero-element-admin/internal/model"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -26,6 +27,8 @@ func NewEditLogic(ctx context.Context, svcCtx *svc.ServiceContext) *EditLogic {
 
 func (l *EditLogic) Edit(req *types.UserEditReq) error {
 	user := model.SysUser{}
+	userId := utils.GetLoginUserId(l.ctx)
+	user.UpdatedBy = userId
 	if err := copier.Copy(&user, &req); err != nil {
 		return errx.NewErrCode(errx.ServerCommonError)
 	}

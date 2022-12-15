@@ -1,6 +1,7 @@
 package role
 
 import (
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/result"
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -19,10 +20,6 @@ func RemoveByIdHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := role.NewRemoveByIdLogic(r.Context(), svcCtx)
 		err := l.RemoveById(&req)
-		if err != nil {
-			httpx.Error(w, err)
-		} else {
-			httpx.Ok(w)
-		}
+		result.HttpResult(w, r, nil, err)
 	}
 }

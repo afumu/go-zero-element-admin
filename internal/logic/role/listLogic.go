@@ -2,6 +2,8 @@ package role
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -24,7 +26,19 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 }
 
 func (l *ListLogic) List() (resp *types.RoleListResp, err error) {
-	// todo: add your logic here and delete this line
+	allRoles, sqlResult := l.svcCtx.RoleDao.ListAll()
+	if sqlResult.Error != nil {
+		return nil, errx.NewErrCode(errx.DbError)
+	}
 
-	return
+	var roles []*types.RoleResp
+	for _, u := range allRoles {
+		roleResp := types.RoleResp{}
+		copier.Copy(&roleResp, &u)
+		roleResp.CreatedAt = u.CreatedAt.UnixMilli()
+		roleResp.UpdatedAt = u.UpdatedAt.UnixMilli()
+		roles = append(roles, &roleResp)
+	}
+
+	return &types.RoleListResp{RoleList: roles}, nil
 }

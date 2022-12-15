@@ -5,10 +5,10 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/utils"
 	"github.com/zouchangfu/go-zero-element-admin/internal/model"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
-	"github.com/zouchangfu/go-zero-element-admin/internal/utils"
 )
 
 type AddLogic struct {
@@ -27,6 +27,9 @@ func NewAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddLogic {
 
 func (l *AddLogic) Add(req *types.UserAddReq) error {
 	user := model.SysUser{}
+	userId := utils.GetLoginUserId(l.ctx)
+	user.CreatedBy = userId
+	user.UpdatedBy = userId
 	if err := copier.Copy(&user, &req); err != nil {
 		return errx.NewErrCode(errx.ServerCommonError)
 	}

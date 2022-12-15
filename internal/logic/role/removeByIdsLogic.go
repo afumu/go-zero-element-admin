@@ -2,6 +2,8 @@ package role
 
 import (
 	"context"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"strings"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -24,7 +26,8 @@ func NewRemoveByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Remov
 }
 
 func (l *RemoveByIdsLogic) RemoveByIds(req *types.FormParamIds) error {
-	// todo: add your logic here and delete this line
-
+	if err := l.svcCtx.RoleDao.RemoveByIds(strings.Split(req.Ids, ",")).Error; err != nil {
+		return errx.NewErrCode(errx.DbError)
+	}
 	return nil
 }

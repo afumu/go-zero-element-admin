@@ -6,8 +6,8 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/pkg/errors"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/utils"
 	"github.com/zouchangfu/go-zero-element-admin/internal/model"
-	"github.com/zouchangfu/go-zero-element-admin/internal/utils"
 	"time"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"

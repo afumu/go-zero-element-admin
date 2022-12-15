@@ -9,16 +9,16 @@ info(
 import "common.api"
 type (
 	RoleAddReq {
-		Name        string `json:"username"`
-		Code        string `json:"password"`
-		Description string `json:"realname,optional"`
+		Name        string `json:"name"`
+		Code        string `json:"code"`
+		Description string `json:"description,optional"`
 	}
 
 	RoleEditReq {
 		Id          int64  `json:"id"`
-		Name        string `json:"username"`
-		Code        string `json:"password"`
-		Description string `json:"realname,optional"`
+		Name        string `json:"name"`
+		Code        string `json:"code"`
+		Description string `json:"description,optional"`
 	}
 
 	RoleResp {
@@ -32,7 +32,7 @@ type (
 		UpdatedAt   int64  `json:"updated_at"`
 	}
 	RoleListResp {
-		UserList []*RoleResp `json:"roleList"`
+		RoleList []*RoleResp `json:"roleList"`
 	}
 )
 
