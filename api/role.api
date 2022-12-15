@@ -1,0 +1,68 @@
+syntax = "v1"
+
+info(
+	title: "角色管理"
+	desc: "角色管理"
+	author: "zouchangfu"
+)
+
+import "common.api"
+type (
+	RoleAddReq {
+		Name        string `json:"username"`
+		Code        string `json:"password"`
+		Description string `json:"realname,optional"`
+	}
+
+	RoleEditReq {
+		Id          int64  `json:"id"`
+		Name        string `json:"username"`
+		Code        string `json:"password"`
+		Description string `json:"realname,optional"`
+	}
+
+	RoleResp {
+		Id          int64  `json:"id"`
+		Name        string `json:"name"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+		CreatedBy   int64  `json:"created_by"`
+		CreatedAt   int64  `json:"created_at"`
+		UpdatedBy   int64  `json:"updated_by"`
+		UpdatedAt   int64  `json:"updated_at"`
+	}
+	RoleListResp {
+		UserList []*RoleResp `json:"roleList"`
+	}
+)
+
+@server(
+	group:role
+	jwt: JwtAuth
+)
+
+service core {
+	@doc "角色列表"
+	@handler list
+	get /role/list returns (RoleListResp)
+	
+	@doc "添加角色"
+	@handler add
+	post /role/add (RoleAddReq)
+	
+	@doc "根据Id查询角色"
+	@handler queryById
+	get /role/queryById (FormParamId) returns (RoleResp)
+	
+	@doc "编辑角色"
+	@handler edit
+	put /role/edit (RoleEditReq)
+	
+	@doc "根据Id删除角色"
+	@handler removeById
+	delete /role/removeById (FormParamId)
+	
+	@doc "批量删除角色"
+	@handler removeByIds
+	delete /role/removeByIds (FormParamIds)
+}

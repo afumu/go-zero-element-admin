@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	user "github.com/zouchangfu/go-zero-element-admin/internal/handler/user"
+	role "github.com/zouchangfu/go-zero-element-admin/internal/handler/role"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -15,45 +15,35 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/user/list",
-				Handler: user.ListHandler(serverCtx),
+				Path:    "/role/list",
+				Handler: role.ListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/add",
-				Handler: user.AddHandler(serverCtx),
+				Path:    "/role/add",
+				Handler: role.AddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/user/queryById",
-				Handler: user.QueryByIdHandler(serverCtx),
+				Path:    "/role/queryById",
+				Handler: role.QueryByIdHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/user/edit",
-				Handler: user.EditHandler(serverCtx),
+				Path:    "/role/edit",
+				Handler: role.EditHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/user/removeById",
-				Handler: user.RemoveByIdHandler(serverCtx),
+				Path:    "/role/removeById",
+				Handler: role.RemoveByIdHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/user/removeByIds",
-				Handler: user.RemoveByIdsHandler(serverCtx),
+				Path:    "/role/removeByIds",
+				Handler: role.RemoveByIdsHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/login",
-				Handler: user.LoginHandler(serverCtx),
-			},
-		},
 	)
 }
