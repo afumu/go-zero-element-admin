@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/zouchangfu/go-zero-element-admin/common/result"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/result"
 	"github.com/zouchangfu/go-zero-element-admin/internal/logic/user"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"net/http"

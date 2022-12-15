@@ -1,72 +1,92 @@
 syntax = "v1"
 
 info(
-    title: "用户管理"
-    desc: "用户管理"
-    author: "zouchangfu"
+	title: "用户管理"
+	desc: "用户管理"
+	author: "zouchangfu"
 )
 
 import "common.api"
 type (
+	UserAddReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+		Realname string `json:"realname,optional"`
+		Sex      int    `json:"sex"`
+		Avatar   string `json:"avatar,optional"`
+	}
 
-   UserAddReq {
-       Username    string `json:"username"`
-       Password    string `json:"password"`
-       Realname    string `json:"realname,optional"`
-       Sex         int    `json:"sex"`
-       Avatar      string `json:"avatar,optional"`
-   }
+	UserEditReq {
+		Id       int64  `json:"id"`
+		Username string `json:"username,optional"`
+		Password string `json:"password,optional"`
+		Realname string `json:"realname,optional"`
+		Sex      int    `json:"sex,optional"`
+		Avatar   string `json:"avatar,optional"`
+		Status   int    `json:"status,optional"`
+	}
 
-   UserEditReq {
-       Id          int64  `json:"id"`
-       Username    string `json:"username,optional"`
-       Password    string `json:"password,optional"`
-       Realname    string `json:"realname,optional"`
-       Sex         int    `json:"sex,optional"`
-       Avatar      string `json:"avatar,optional"`
-       Status      int    `json:"status,optional"`
-   }
+	UserResp {
+		Id        int64  `json:"id"`
+		Username  string `json:"username"`
+		Realname  string `json:"realname"`
+		Password  string `json:"password"`
+		Salt      string `json:"salt"`
+		Sex       int    `json:"sex"`
+		Avatar    string `json:"avatar"`
+		Status    int    `json:"status"`
+		DeletedAt int    `json:"deleted_at"`
+		CreatedBy int64  `json:"created_by"`
+		CreatedAt int64  `json:"created_at"`
+		UpdatedBy int64  `json:"updated_by"`
+		UpdatedAt int64  `json:"updated_at"`
+	}
+	UserListResp {
+		UserList []*UserResp `json:"userList"`
+	}
 
-   UserResp {
-       Id          int64  `json:"id"`
-       Username    string `json:"username"`
-       Realname    string `json:"realname"`
-       Password    string `json:"password"`
-       Salt        string `json:"salt"`
-       Sex         int    `json:"sex"`
-       Avatar      string `json:"avatar"`
-       Status      int    `json:"status"`
-       DeletedAt     int    `json:"deleted_at"`
-       CreatedBy   int64  `json:"created_by"`
-       CreatedAt int64  `json:"created_at"`
-       UpdatedBy   int64  `json:"updated_by"`
-       UpdatedAt int64  `json:"updated_at"`
-   }
-   UserListResp{
-     userList []*UserResp `json:"userList"`
-   }
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+
+	LoginResp {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+		RefreshAfter int64  `json:"refreshAfter"`
+	}
 )
 
 @server(
-    group:user
+	group:user
 )
 
 service user-api {
-    @handler list
-    get /user/list returns (UserResp)
-
-    @handler add
-    post /user/add (UserAddReq)
-
-    @handler queryById
-    get /user/queryById (FormParamId) returns (UserResp)
-
-    @handler edit
-    put /user/edit (UserEditReq)
-
-    @handler removeById
-    delete /user/removeById (FormParamId)
-
-    @handler removeByIds
-    delete /user/removeByIds (FormParamIds)
+	@doc "用户列表"
+	@handler list
+	get /user/list returns (UserResp)
+	
+	@doc "添加用户"
+	@handler add
+	post /user/add (UserAddReq)
+	
+	@doc "根据Id查询用户"
+	@handler queryById
+	get /user/queryById (FormParamId) returns (UserResp)
+	
+	@doc "编辑用户"
+	@handler edit
+	put /user/edit (UserEditReq)
+	
+	@doc "根据Id删除用户"
+	@handler removeById
+	delete /user/removeById (FormParamId)
+	
+	@doc "批量删除用户"
+	@handler removeByIds
+	delete /user/removeByIds (FormParamIds)
+	
+	@doc "登录"
+	@handler login
+	post /user/login (LoginReq) returns (LoginResp)
 }

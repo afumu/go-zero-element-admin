@@ -4,17 +4,17 @@ import (
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"github.com/zouchangfu/go-zero-element-admin/common/errx"
+	errx2 "github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 	"net/http"
 )
 
 func HttpResult(w http.ResponseWriter, r *http.Request, resp interface{}, err error) {
 	if err != nil {
-		errCode := errx.ServerCommonError
+		errCode := errx2.ServerCommonError
 		errMsg := "服务器开小差啦，稍后再来试一试"
 
 		causeErr := errors.Cause(err)
-		if e, ok := causeErr.(*errx.CodeError); ok {
+		if e, ok := causeErr.(*errx2.CodeError); ok {
 			errCode = e.GetErrCode()
 			errMsg = e.GetErrMsg()
 		}

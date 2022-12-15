@@ -39,6 +39,17 @@ type UserListResp struct {
 	UserList []*UserResp `json:"userList"`
 }
 
+type LoginReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginResp struct {
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+	RefreshAfter int64  `json:"refreshAfter"`
+}
+
 type FormParamId struct {
 	Id int64 `form:"id"`
 }
