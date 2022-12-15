@@ -5,19 +5,19 @@ import (
 	"net/http"
 )
 
-// GlobalMiddle : with jwt on the verification, no jwt on the verification
-type GlobalMiddle struct {
+// GlobalMiddleware : with jwt on the verification, no jwt on the verification
+type GlobalMiddleware struct {
+	secret string
 }
 
-func NewGlobalMiddle() *GlobalMiddle {
-	return &GlobalMiddle{}
+func NewGlobalMiddleware() *GlobalMiddleware {
+	return &GlobalMiddleware{}
 }
 
-func (m *GlobalMiddle) Handle(next http.HandlerFunc) http.HandlerFunc {
+func (m *GlobalMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("global before")
+		fmt.Println("global before....................")
 		next(w, r)
-		fmt.Println(r)
-		fmt.Println("global end")
+		fmt.Println("global end....................")
 	}
 }

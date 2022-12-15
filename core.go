@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/middleware"
 	"github.com/zouchangfu/go-zero-element-admin/internal/config"
 	"github.com/zouchangfu/go-zero-element-admin/internal/handler"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/user-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/core.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -23,6 +24,8 @@ func main() {
 	defer server.Stop()
 
 	ctx := svc.NewServiceContext(c)
+
+	server.Use(middleware.NewGlobalMiddleware().Handle)
 	handler.RegisterHandlers(server, ctx)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
