@@ -2,7 +2,7 @@ package user
 
 import (
 	"context"
-	errx2 "github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
 	"strings"
@@ -26,7 +26,7 @@ func NewRemoveByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Remov
 
 func (l *RemoveByIdsLogic) RemoveByIds(req *types.FormParamIds) error {
 	if err := l.svcCtx.UserDao.RemoveByIds(strings.Split(req.Ids, ",")).Error; err != nil {
-		return errx2.NewErrCode(errx2.DbError)
+		return errx.NewErrCode(errx.DbError)
 	}
 	return nil
 }

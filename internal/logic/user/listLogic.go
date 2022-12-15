@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 	"github.com/jinzhu/copier"
-	errx2 "github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
 
@@ -27,7 +27,7 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 func (l *ListLogic) List() (resp *types.UserListResp, err error) {
 	allUsers, sqlResult := l.svcCtx.UserDao.ListAll()
 	if sqlResult.Error != nil {
-		return nil, errx2.NewErrCode(errx2.DbError)
+		return nil, errx.NewErrCode(errx.DbError)
 	}
 
 	var users []*types.UserResp

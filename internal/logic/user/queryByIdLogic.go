@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 	"github.com/jinzhu/copier"
-	errx2 "github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
 
@@ -27,12 +27,12 @@ func NewQueryByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBy
 func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.UserResp, err error) {
 	user, sqlResult := l.svcCtx.UserDao.GetById(req.Id)
 	if sqlResult.Error != nil {
-		return nil, errx2.NewErrCode(errx2.DbError)
+		return nil, errx.NewErrCode(errx.DbError)
 	}
 
 	userResp := types.UserResp{}
 	if err := copier.Copy(&userResp, &user); err != nil {
-		return nil, errx2.NewErrCode(errx2.DbError)
+		return nil, errx.NewErrCode(errx.DbError)
 	}
 	return &userResp, nil
 }
