@@ -1,0 +1,107 @@
+@import "variables.scss";
+
+// 引入富文本编辑器的css
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+@import "~quill/dist/quill.bubble.css";
+
+// 引入自定义字体
+@import "./assets/style/font.css";
+
+// 样式重置
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  color: $font-color;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  h1,h2,h3,h4,h5,h6,ul {
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    list-style: none;
+  }
+  #app {
+    height: 100%;
+    min-width: $page-min-width;
+  }
+}
+
+// 穿梭框的按钮
+.el-transfer__buttons {
+  padding: 0 16px !important;
+}
+
+.el-collapse-item__header {
+  background: #FAFAFA !important;
+  border-bottom: 1px solid #DADADA !important;
+  height: 34px !important;
+  // border-radius: 4px !important;
+  padding: 0 10px 0 15px;
+  font-size: 12px !important;
+}
+
+.el-collapse {
+  border-top: none !important;
+}
+
+.el-collapse-item {
+  border: 1px solid #DADADA !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+
+.el-collapse-item__wrap {
+  border-bottom: none !important;
+}
+
+.el-collapse-item__content {
+  padding: 15px 0 10px 0 !important;
+}
+
+.kj-title {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.table-search-form section {
+  margin-bottom: 0 !important;
+  margin-right: 5px;
+}
+
+.el-button--mini {
+  padding: 5px 12px !important;
+}
+
+.contentMain {
+  background: #fff;
+  margin: 10px auto 0 auto;
+  width: 98%;
+}
+
+.el-tabs__header {
+  padding-left: 15px !important;
+}
+
+.ql-editor {
+  height: auto !important;
+}
+.ql-container{
+  height: auto !important;
+  min-height: 180px;
+}
+.el-tabs__header{
+  margin: 0 15px 10px 15px !important;
+  padding-left: 0px !important;
+}
