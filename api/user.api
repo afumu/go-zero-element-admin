@@ -55,6 +55,23 @@ type (
 		AccessExpire int64  `json:"accessExpire"`
 		RefreshAfter int64  `json:"refreshAfter"`
 	}
+
+	LoginUserResp {
+		Id        int64  `json:"id"`
+		Username  string `json:"username"`
+		Realname  string `json:"realname"`
+		Password  string `json:"password"`
+		Salt      string `json:"salt"`
+		Sex       int    `json:"sex"`
+		Avatar    string `json:"avatar"`
+		Status    int    `json:"status"`
+		DeletedAt int    `json:"deleted_at"`
+		CreatedBy int64  `json:"created_by"`
+		CreatedAt int64  `json:"created_at"`
+		UpdatedBy int64  `json:"updated_by"`
+		UpdatedAt int64  `json:"updated_at"`
+		Permissions []string  `json:"permissions"`
+	}
 )
 
 @server(
@@ -89,7 +106,7 @@ service core {
 
 	@doc "查询当前登录用户信息"
 	@handler queryLoginUser
-	get /sys/user/queryLoginUser returns (UserResp)
+	get /sys/user/queryLoginUser returns (LoginUserResp)
 }
 
 @server(

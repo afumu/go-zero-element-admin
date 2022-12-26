@@ -50,6 +50,23 @@ type LoginResp struct {
 	RefreshAfter int64  `json:"refreshAfter"`
 }
 
+type LoginUserResp struct {
+	Id          int64    `json:"id"`
+	Username    string   `json:"username"`
+	Realname    string   `json:"realname"`
+	Password    string   `json:"password"`
+	Salt        string   `json:"salt"`
+	Sex         int      `json:"sex"`
+	Avatar      string   `json:"avatar"`
+	Status      int      `json:"status"`
+	DeletedAt   int      `json:"deleted_at"`
+	CreatedBy   int64    `json:"created_by"`
+	CreatedAt   int64    `json:"created_at"`
+	UpdatedBy   int64    `json:"updated_by"`
+	UpdatedAt   int64    `json:"updated_at"`
+	Permissions []string `json:"permissions"`
+}
+
 type FormParamId struct {
 	Id int64 `form:"id"`
 }

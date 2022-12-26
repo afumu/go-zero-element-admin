@@ -26,7 +26,7 @@ func NewQueryLoginUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Qu
 	}
 }
 
-func (l *QueryLoginUserLogic) QueryLoginUser() (resp *types.UserResp, err error) {
+func (l *QueryLoginUserLogic) QueryLoginUser() (resp *types.LoginUserResp, err error) {
 	userId := utils.GetLoginUserId(l.ctx)
 
 	user, sqlResult := l.svcCtx.UserDao.GetById(userId)
@@ -34,10 +34,14 @@ func (l *QueryLoginUserLogic) QueryLoginUser() (resp *types.UserResp, err error)
 		return nil, errx.NewErrCode(errx.DbError)
 	}
 
-	userResp := types.UserResp{}
-	if err := copier.Copy(&userResp, &user); err != nil {
+	loginUser := types.LoginUserResp{}
+	if err := copier.Copy(&loginUser, &user); err != nil {
 		return nil, errx.NewErrCode(errx.CopierError)
 	}
 
-	return &userResp, nil
+	var permissions []string
+	permissions = append(permissions, "aa")
+	loginUser.Permissions = permissions
+
+	return &loginUser, nil
 }

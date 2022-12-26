@@ -32,7 +32,7 @@ export function updatePwd(data) {
 
 // 获取菜单
 export function getMenu(data) {
-  return request.get('/sys/permission/getUserPermissionByToken', { params: data })
+  return request.get('/sys/menu/list', { params: data })
 }
 
 // 导出文件

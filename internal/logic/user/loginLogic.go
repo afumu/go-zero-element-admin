@@ -35,7 +35,6 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
-
 	query := gplus.NewQuery[model.SysUser]()
 	query.Eq(model.SysUserColumn.Username, req.Username)
 	user, sqlResult := l.svcCtx.UserDao.GetOne(query)

@@ -57,7 +57,7 @@ export default {
                 .then((res) => {
                   console.info('res.accessToken',res.accessToken)
                   localStorage.setItem("Authorization",res.accessToken)
-                  // window.location.href = process.env.VUE_APP_CONTEXT_PATH;
+                  window.location.href = process.env.VUE_APP_CONTEXT_PATH;
                 })
                 .catch((e) => {
                   this.$tip.apiFailed(e);

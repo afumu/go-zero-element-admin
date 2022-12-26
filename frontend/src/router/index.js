@@ -42,6 +42,7 @@ const router = new VueRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
+  console.info("----------------------------before-------------------------")
   // 无权访问&404页面可直接访问
   if (to.name === 'no-permissions' || to.name === 'not-found') {
     next()

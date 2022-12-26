@@ -31,6 +31,10 @@ axiosInstance.interceptors.request.use(config => {
   // config.headers['eva-platform'] = `pc-${pkg.version}`
   // 设置认证头
   const authToken = Cookies.get('X-Access-Token')
+  const accessToken = localStorage.getItem("Authorization");
+  if (accessToken != null){
+    config.headers['Authorization'] = accessToken
+  }
   if (authToken != null) {
     config.headers['X-Access-Token'] = authToken
   }
