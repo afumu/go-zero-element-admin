@@ -44,25 +44,25 @@ type (
 service core {
 	@doc "角色列表"
 	@handler list
-	get /role/list returns (RoleListResp)
+	get /sys/role/list returns (RoleListResp)
 	
 	@doc "添加角色"
 	@handler add
-	post /role/add (RoleAddReq)
+	post /sys/role/add (RoleAddReq)
 	
 	@doc "根据Id查询角色"
 	@handler queryById
-	get /role/queryById (FormParamId) returns (RoleResp)
+	get /sys/role/queryById (FormParamId) returns (RoleResp)
 	
 	@doc "编辑角色"
 	@handler edit
-	put /role/edit (RoleEditReq)
+	put /sys/role/edit (RoleEditReq)
 	
 	@doc "根据Id删除角色"
 	@handler removeById
-	delete /role/removeById (FormParamId)
+	delete /sys/role/removeById (FormParamId)
 	
 	@doc "批量删除角色"
 	@handler removeByIds
-	delete /role/removeByIds (FormParamIds)
+	delete /sys/role/removeByIds (FormParamIds)
 }

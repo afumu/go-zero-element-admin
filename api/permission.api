@@ -45,25 +45,25 @@ type (
 service core {
 	@doc "权限管理"
 	@handler list
-	get /permission/list returns (PermissionListResp)
+	get /sys/permission/list returns (PermissionListResp)
 	
 	@doc "添加权限"
 	@handler add
-	post /permission/add (PermissionAddReq)
+	post /sys/permission/add (PermissionAddReq)
 	
 	@doc "根据Id查询权限"
 	@handler queryById
-	get /permission/queryById (FormParamId) returns (PermissionResp)
+	get /sys/permission/queryById (FormParamId) returns (PermissionResp)
 	
 	@doc "编辑权限"
 	@handler edit
-	put /permission/edit (PermissionEditReq)
+	put /sys/permission/edit (PermissionEditReq)
 	
 	@doc "根据Id删除权限"
 	@handler removeById
-	delete /permission/removeById (FormParamId)
+	delete /sys/permission/removeById (FormParamId)
 	
 	@doc "批量删除权限"
 	@handler removeByIds
-	delete /permission/removeByIds (FormParamIds)
+	delete /sys/permission/removeByIds (FormParamIds)
 }

@@ -45,25 +45,25 @@ type (
 service core {
 	@doc "字典管理"
 	@handler list
-	get /dict/list returns (DictListResp)
+	get /sys/dict/list returns (DictListResp)
 	
 	@doc "添加字典"
 	@handler add
-	post /dict/add (DictAddReq)
+	post /sys/dict/add (DictAddReq)
 	
 	@doc "根据Id查询字典"
 	@handler queryById
-	get /dict/queryById (FormParamId) returns (DictResp)
+	get /sys/dict/queryById (FormParamId) returns (DictResp)
 	
 	@doc "编辑字典"
 	@handler edit
-	put /dict/edit (DictEditReq)
+	put /sys/dict/edit (DictEditReq)
 	
 	@doc "根据Id删除字典"
 	@handler removeById
-	delete /dict/removeById (FormParamId)
+	delete /sys/dict/removeById (FormParamId)
 	
 	@doc "批量删除字典"
 	@handler removeByIds
-	delete /dict/removeByIds (FormParamIds)
+	delete /sys/dict/removeByIds (FormParamIds)
 }

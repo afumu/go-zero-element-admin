@@ -50,25 +50,25 @@ type (
 service core {
 	@doc "菜单列表"
 	@handler list
-	get /menu/list returns (MenuListResp)
+	get /sys/menu/list returns (MenuListResp)
 	
 	@doc "添加菜单"
 	@handler add
-	post /menu/add (MenuAddReq)
+	post /sys/menu/add (MenuAddReq)
 	
 	@doc "根据Id查询菜单"
 	@handler queryById
-	get /menu/queryById (FormParamId) returns (MenuResp)
+	get /sys/menu/queryById (FormParamId) returns (MenuResp)
 	
 	@doc "编辑菜单"
 	@handler edit
-	put /menu/edit (MenuEditReq)
+	put /sys/menu/edit (MenuEditReq)
 	
 	@doc "根据Id删除菜单"
 	@handler removeById
-	delete /menu/removeById (FormParamId)
+	delete /sys/menu/removeById (FormParamId)
 	
 	@doc "批量删除菜单"
 	@handler removeByIds
-	delete /menu/removeByIds (FormParamIds)
+	delete /sys/menu/removeByIds (FormParamIds)
 }

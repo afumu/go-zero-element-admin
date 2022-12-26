@@ -65,31 +65,31 @@ type (
 service core {
 	@doc "用户列表"
 	@handler list
-	get /user/list returns (UserResp)
+	get /sys/user/list returns (UserResp)
 	
 	@doc "添加用户"
 	@handler add
-	post /user/add (UserAddReq)
+	post /sys/user/add (UserAddReq)
 	
 	@doc "根据Id查询用户"
 	@handler queryById
-	get /user/queryById (FormParamId) returns (UserResp)
+	get /sys/user/queryById (FormParamId) returns (UserResp)
 	
 	@doc "编辑用户"
 	@handler edit
-	put /user/edit (UserEditReq)
+	put /sys/user/edit (UserEditReq)
 	
 	@doc "根据Id删除用户"
 	@handler removeById
-	delete /user/removeById (FormParamId)
+	delete /sys/user/removeById (FormParamId)
 	
 	@doc "批量删除用户"
 	@handler removeByIds
-	delete /user/removeByIds (FormParamIds)
+	delete /sys/user/removeByIds (FormParamIds)
 
 	@doc "查询当前登录用户信息"
 	@handler queryLoginUser
-	get /user/queryLoginUser returns (UserResp)
+	get /sys/user/queryLoginUser returns (UserResp)
 }
 
 @server(
@@ -98,5 +98,5 @@ service core {
 service core {
 	@doc "登录"
 	@handler login
-	post /user/login (LoginReq) returns (LoginResp)
+	post /sys/user/login (LoginReq) returns (LoginResp)
 }
