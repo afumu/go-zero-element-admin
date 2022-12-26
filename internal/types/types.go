@@ -136,6 +136,11 @@ type MenuListResp struct {
 	MenuList []*MenuResp `json:"menuList"`
 }
 
+type UserMenuResp struct {
+	Permissions []string   `json:"permissions"`
+	Menus       []MenuResp `json:"menus"`
+}
+
 type PermissionAddReq struct {
 	Name   string `json:"name"`
 	Code   string `json:"code"`

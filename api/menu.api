@@ -40,6 +40,12 @@ type (
 	MenuListResp {
 		MenuList []*MenuResp `json:"menuList"`
 	}
+
+    UserMenuResp {
+	   Permissions []string `json:"permissions"`
+	   Menus []MenuResp `json:"menus"`
+	}
+
 )
 
 @server(
@@ -71,4 +77,8 @@ service core {
 	@doc "批量删除菜单"
 	@handler removeByIds
 	delete /sys/menu/removeByIds (FormParamIds)
+
+	@doc "获取用户菜单"
+	@handler queryUserMenu
+	get /sys/menu/queryUserMenu returns (UserMenuResp)
 }

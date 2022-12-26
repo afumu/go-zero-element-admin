@@ -134,6 +134,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/sys/menu/removeByIds",
 				Handler: menu.RemoveByIdsHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/sys/menu/queryUserMenu",
+				Handler: menu.QueryUserMenuHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
 	)
