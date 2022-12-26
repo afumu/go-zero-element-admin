@@ -118,3 +118,31 @@ type MenuResp struct {
 type MenuListResp struct {
 	MenuList []*MenuResp `json:"menuList"`
 }
+
+type PermissionAddReq struct {
+	Name   string `json:"name"`
+	Code   string `json:"code"`
+	Status int    `json:"sort"`
+}
+
+type PermissionEditReq struct {
+	Id     int64  `json:"id"`
+	Name   string `json:"name"`
+	Code   string `json:"code"`
+	Status int    `json:"sort"`
+}
+
+type PermissionResp struct {
+	Id        int64  `json:"id"`
+	Name      string `json:"name"`
+	Code      string `json:"code"`
+	Status    int    `json:"sort"`
+	CreatedBy int64  `json:"created_by"`
+	CreatedAt int64  `json:"created_at"`
+	UpdatedBy int64  `json:"updated_by"`
+	UpdatedAt int64  `json:"updated_at"`
+}
+
+type PermissionListResp struct {
+	PermissionList []*PermissionResp `json:"permissionList"`
+}

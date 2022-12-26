@@ -1,0 +1,69 @@
+syntax = "v1"
+
+info(
+	title: "权限管理"
+	desc: "权限管理"
+	author: "zouchangfu"
+)
+
+import "common.api"
+type (
+	PermissionAddReq {
+		Name        string `json:"name"`
+		Code         string `json:"code"`
+		Status        int `json:"sort"`
+	}
+
+	PermissionEditReq {
+		Id          int64  `json:"id"`
+		Name        string `json:"name"`
+		Code         string `json:"code"`
+		Status        int `json:"sort"`
+	}
+
+	PermissionResp {
+		Id          int64  `json:"id"`
+		Name        string `json:"name"`
+		Code         string `json:"code"`
+		Status        int `json:"sort"`
+		CreatedBy   int64  `json:"created_by"`
+		CreatedAt   int64  `json:"created_at"`
+		UpdatedBy   int64  `json:"updated_by"`
+		UpdatedAt   int64  `json:"updated_at"`
+	}
+
+	PermissionListResp {
+		PermissionList []*PermissionResp `json:"permissionList"`
+	}
+)
+
+@server(
+	group:permission
+	jwt: JwtAuth
+)
+
+service core {
+	@doc "权限管理"
+	@handler list
+	get /permission/list returns (PermissionListResp)
+	
+	@doc "添加权限"
+	@handler add
+	post /permission/add (PermissionAddReq)
+	
+	@doc "根据Id查询权限"
+	@handler queryById
+	get /permission/queryById (FormParamId) returns (PermissionResp)
+	
+	@doc "编辑权限"
+	@handler edit
+	put /permission/edit (PermissionEditReq)
+	
+	@doc "根据Id删除权限"
+	@handler removeById
+	delete /permission/removeById (FormParamId)
+	
+	@doc "批量删除权限"
+	@handler removeByIds
+	delete /permission/removeByIds (FormParamIds)
+}

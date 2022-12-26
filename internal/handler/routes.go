@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	menu "github.com/zouchangfu/go-zero-element-admin/internal/handler/menu"
+	permission "github.com/zouchangfu/go-zero-element-admin/internal/handler/permission"
 	role "github.com/zouchangfu/go-zero-element-admin/internal/handler/role"
 	user "github.com/zouchangfu/go-zero-element-admin/internal/handler/user"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
@@ -126,6 +127,42 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodDelete,
 				Path:    "/menu/removeByIds",
 				Handler: menu.RemoveByIdsHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/permission/list",
+				Handler: permission.ListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/permission/add",
+				Handler: permission.AddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/permission/queryById",
+				Handler: permission.QueryByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/permission/edit",
+				Handler: permission.EditHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/permission/removeById",
+				Handler: permission.RemoveByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/permission/removeByIds",
+				Handler: permission.RemoveByIdsHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
