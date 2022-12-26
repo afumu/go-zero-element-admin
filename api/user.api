@@ -86,6 +86,10 @@ service core {
 	@doc "批量删除用户"
 	@handler removeByIds
 	delete /user/removeByIds (FormParamIds)
+
+	@doc "查询当前登录用户信息"
+	@handler queryLoginUser
+	get /user/queryLoginUser returns (UserResp)
 }
 
 @server(

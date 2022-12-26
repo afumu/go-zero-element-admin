@@ -47,6 +47,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/removeByIds",
 				Handler: user.RemoveByIdsHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/user/queryLoginUser",
+				Handler: user.QueryLoginUserHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
 	)
