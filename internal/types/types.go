@@ -146,3 +146,31 @@ type PermissionResp struct {
 type PermissionListResp struct {
 	PermissionList []*PermissionResp `json:"permissionList"`
 }
+
+type DictAddReq struct {
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Description string `json:"description"`
+}
+
+type DictEditReq struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Description string `json:"description"`
+}
+
+type DictResp struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Description string `json:"description"`
+	CreatedBy   int64  `json:"created_by"`
+	CreatedAt   int64  `json:"created_at"`
+	UpdatedBy   int64  `json:"updated_by"`
+	UpdatedAt   int64  `json:"updated_at"`
+}
+
+type DictListResp struct {
+	DictList []*DictResp `json:"DictList"`
+}

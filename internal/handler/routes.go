@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	dict "github.com/zouchangfu/go-zero-element-admin/internal/handler/dict"
 	menu "github.com/zouchangfu/go-zero-element-admin/internal/handler/menu"
 	permission "github.com/zouchangfu/go-zero-element-admin/internal/handler/permission"
 	role "github.com/zouchangfu/go-zero-element-admin/internal/handler/role"
@@ -163,6 +164,42 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodDelete,
 				Path:    "/permission/removeByIds",
 				Handler: permission.RemoveByIdsHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/list",
+				Handler: dict.ListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/dict/add",
+				Handler: dict.AddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/queryById",
+				Handler: dict.QueryByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/dict/edit",
+				Handler: dict.EditHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/dict/removeById",
+				Handler: dict.RemoveByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/dict/removeByIds",
+				Handler: dict.RemoveByIdsHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
