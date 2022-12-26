@@ -37,6 +37,5 @@ func (l *AddLogic) Add(req *types.RoleAddReq) error {
 	if err := l.svcCtx.RoleDao.Save(&role).Error; err != nil {
 		return errx.NewErrCode(errx.DbError)
 	}
-
 	return nil
 }

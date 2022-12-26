@@ -26,13 +26,13 @@ func NewQueryByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBy
 }
 
 func (l *QueryByIdLogic) QueryById(req *types.FormParamId) (resp *types.RoleResp, err error) {
-	user, sqlResult := l.svcCtx.RoleDao.GetById(req.Id)
+	role, sqlResult := l.svcCtx.RoleDao.GetById(req.Id)
 	if sqlResult.Error != nil {
 		return nil, errx.NewErrCode(errx.DbError)
 	}
 
 	roleResp := types.RoleResp{}
-	if err := copier.Copy(&roleResp, &user); err != nil {
+	if err := copier.Copy(&roleResp, &role); err != nil {
 		return nil, errx.NewErrCode(errx.DbError)
 	}
 	return &roleResp, nil

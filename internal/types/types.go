@@ -85,3 +85,36 @@ type RoleResp struct {
 type RoleListResp struct {
 	RoleList []*RoleResp `json:"roleList"`
 }
+
+type MenuAddReq struct {
+	Name        string `json:"name"`
+	Url         string `json:"url"`
+	Sort        int    `json:"sort"`
+	Icon        int    `json:"icon"`
+	Description string `json:"description,optional"`
+}
+
+type MenuEditReq struct {
+	Id          int64  `json:"id"`
+	Url         string `json:"url"`
+	Sort        int    `json:"sort"`
+	Icon        int    `json:"icon"`
+	Description string `json:"description,optional"`
+}
+
+type MenuResp struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Url         string `json:"url"`
+	Sort        int    `json:"sort"`
+	Icon        int    `json:"icon"`
+	Description string `json:"description"`
+	CreatedBy   int64  `json:"created_by"`
+	CreatedAt   int64  `json:"created_at"`
+	UpdatedBy   int64  `json:"updated_by"`
+	UpdatedAt   int64  `json:"updated_at"`
+}
+
+type MenuListResp struct {
+	MenuList []*MenuResp `json:"menuList"`
+}

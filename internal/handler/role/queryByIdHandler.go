@@ -17,7 +17,6 @@ func QueryByIdHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			httpx.Error(w, err)
 			return
 		}
-
 		l := role.NewQueryByIdLogic(r.Context(), svcCtx)
 		resp, err := l.QueryById(&req)
 		result.HttpResult(w, r, resp, err)

@@ -12,6 +12,7 @@ type ServiceContext struct {
 	GormDB  *gorm.DB
 	UserDao *dao.UserDao[model.SysUser]
 	RoleDao *dao.RoleDao[model.SysRole]
+	MenuDao *dao.RoleDao[model.SysMenu]
 	JwtAuth struct {
 		AccessSecret string
 	}
@@ -24,5 +25,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		GormDB:  gormDB,
 		UserDao: dao.NewUserDao[model.SysUser](),
 		RoleDao: dao.NewRoleDao[model.SysRole](),
+		MenuDao: dao.NewRoleDao[model.SysMenu](),
 	}
 }
