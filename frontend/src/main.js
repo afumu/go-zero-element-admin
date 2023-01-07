@@ -63,6 +63,7 @@ new Vue({
         },
         // 初始化路由
         async initRoutes() {
+            console.info("initRoutes.............................")
             if (this.loading || this.userInfo == null) {
                 return
             }
@@ -79,7 +80,8 @@ new Vue({
                     // this.$store.commit('SET_MENU', menus.menu)
                     // console.log('menuData', this.menuData)
                     // 添加菜单
-                    storeMenus.push.apply(storeMenus, menus.menu)
+                    console.info("menus......",menus)
+                    storeMenus.push.apply(storeMenus, menus.menus)
                     // 添加路由
                     this.__addRouters(storeMenus)
                     // 404
@@ -89,7 +91,8 @@ new Vue({
                     })
                     // 路由加载完成后，如果访问的是/，跳转至动态识别的首页
                     if (this.$route.path === '/') {
-                        this.$router.push(storeMenus[0].path)
+                        console.info("storeMenus[0]",storeMenus[0])
+                        this.$router.push(storeMenus[0].url)
                     }
                 })
                 .catch(e => {
@@ -109,11 +112,11 @@ new Vue({
             for (const route of routes) {
                 const parentsDump = JSON.parse(JSON.stringify(parents))
                 parentsDump.push(route)
-                if (route.path == null || route.path === '') {
+                if (route.url == null || route.url === '') {
                     this.__addRouters(route.children, parentsDump)
                     continue
                 }
-                if (rs.findIndex(r => r.path === route.path) > -1) {
+                if (rs.findIndex(r => r.url === route.url) > -1) {
                     this.__addRouters(route.children, parentsDump)
                     continue
                 }
@@ -121,13 +124,13 @@ new Vue({
                     this.setHomePage(route)
                 }
                 router.addRoute('layout', {
-                    path: route.path,
+                    path: route.url,
                     name: route.name,
                     meta: {
-                        title: route.meta.title,
-                        paths: [...parents.map(p => p.meta.title), route.meta.title]
+                        title: route.name,
+                        paths: [...parents.map(p => p.name), route.name]
                     },
-                    component: () => import('@/views' + route.path)
+                    component: () => import('@/views' + route.url)
                 })
                 this.__addRouters(route.children, parentsDump)
             }

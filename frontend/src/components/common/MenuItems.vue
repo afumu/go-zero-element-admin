@@ -1,12 +1,12 @@
 <template>
-  <el-menu-item v-if="menu.children == null || menu.children.length == 0" :key="menu.index" :index="menu.path">
-    <i :class="menu.meta.icon"></i>
-    <span slot="title">{{menu.meta.title}}</span>
+  <el-menu-item v-if="menu.children == null || menu.children.length == 0" :key="menu.index" :index="menu.url">
+    <i :class="menu.icon"></i>
+    <span slot="title">{{menu.name}}</span>
   </el-menu-item>
-  <el-submenu v-else :index="menu.path">
+  <el-submenu v-else :index="menu.url">
     <template slot="title">
-      <i :class="menu.meta.icon"></i>
-      <span slot="title">{{menu.meta.title}}</span>
+      <i :class="menu.icon"></i>
+      <span slot="title">{{menu.name}}</span>
     </template>
     <MenuItems v-for="child in menu.children" :menu="child" :key="child.index"/>
   </el-submenu>

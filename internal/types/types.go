@@ -124,7 +124,7 @@ type MenuResp struct {
 	Name        string `json:"name"`
 	Url         string `json:"url"`
 	Sort        int    `json:"sort"`
-	Icon        int    `json:"icon"`
+	Icon        string `json:"icon"`
 	Description string `json:"description"`
 	CreatedBy   int64  `json:"created_by"`
 	CreatedAt   int64  `json:"created_at"`
@@ -137,8 +137,8 @@ type MenuListResp struct {
 }
 
 type UserMenuResp struct {
-	Permissions []string   `json:"permissions"`
-	Menus       []MenuResp `json:"menus"`
+	Permissions []string    `json:"permissions"`
+	Menus       []*MenuResp `json:"menus"`
 }
 
 type PermissionAddReq struct {

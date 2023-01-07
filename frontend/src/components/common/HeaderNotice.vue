@@ -275,8 +275,8 @@ export default {
       module: '我的消息',
       api: '/message/usermessage'
     })
-    this.initWebSocket()
-    this.loadData()
+    // this.initWebSocket()
+    // this.loadData()
     // this.announcement1.push({
     //   titile: "标题1",
     //   msgContent:"<p>内容内容内容</p>",

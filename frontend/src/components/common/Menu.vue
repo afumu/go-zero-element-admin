@@ -1,7 +1,7 @@
 <template>
   <div class="menu" :class="{ collapse: menuData.collapse }">
     <div class="logo">
-      <div><img src="../../../public/logo_title.png" /></div>
+      <div><img src="../../../public/vim-go.svg" /></div>
       <h1 :class="{ hidden: menuData.collapse }">{{title}}</h1>
     </div>
     <scrollbar>

@@ -1,6 +1,7 @@
 <template>
     <!-- <TableLayout> -->
-       <div class="home">        
+       <div class="home">
+         <h2>home</h2>
        </div>
     <!-- </TableLayout> -->
 </template>
@@ -9,7 +10,7 @@ export default {
     components:{},
     data () {
         return {
-        
+
         }
     },
     methods: {
@@ -18,7 +19,7 @@ export default {
     created () {
     },
     mounted(){
-        
+
     }
 }
 </script>

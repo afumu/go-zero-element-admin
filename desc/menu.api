@@ -29,7 +29,7 @@ type (
 		Name        string `json:"name"`
 		Url         string `json:"url"`
 		Sort        int `json:"sort"`
-		Icon        int `json:"icon"`
+		Icon        string `json:"icon"`
 		Description string `json:"description"`
 		CreatedBy   int64  `json:"created_by"`
 		CreatedAt   int64  `json:"created_at"`
@@ -43,7 +43,7 @@ type (
 
     UserMenuResp {
 	   Permissions []string `json:"permissions"`
-	   Menus []MenuResp `json:"menus"`
+	   Menus []*MenuResp `json:"menus"`
 	}
 
 )

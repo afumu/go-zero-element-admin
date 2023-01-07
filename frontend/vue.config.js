@@ -10,7 +10,7 @@ module.exports = {
     port: 10084,
     proxy: {
       [process.env.VUE_APP_API_PREFIX]: {
-        target: 'http://192.168.3.104:8887',
+        target: 'http://localhost:8887',
         changeOrigin: true,
         pathRewrite: {
           [`^${[process.env.VUE_APP_API_PREFIX]}`]: ''

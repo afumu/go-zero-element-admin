@@ -28,11 +28,9 @@ export function updatePwd(data) {
   return request.put('/sys/user/updatePassword', data)
 }
 
-
-
 // 获取菜单
 export function getMenu(data) {
-  return request.get('/sys/menu/list', { params: data })
+  return request.get('/sys/menu/queryUserMenu', { params: data })
 }
 
 // 导出文件

@@ -1,9 +1,9 @@
 <template>
     <div class="wrap">
         <div class="introduce">
-            <img src="@/assets/images/logo01.png" alt="">
+            <img src="@/assets/images/vim-go.svg" alt="">
             <p>{{title}}</p>
-            <span>Material management system</span>
+            <span>go-zero-element-admin</span>
         </div>
         <div class="login">
             <h1>欢迎登陆</h1>
@@ -102,10 +102,11 @@ body{
 .wrap {
     width: 100%;
     height: 100vh;
-    background-image: url("../assets/images/beijing.png");
+    background-image: url("../assets/images/bg4.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-clip: content-box;
+    background-position: center;
     background-position: center;
     position: relative;
     overflow: auto;

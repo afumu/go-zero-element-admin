@@ -2,6 +2,8 @@ package menu
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -24,7 +26,17 @@ func NewQueryUserMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 }
 
 func (l *QueryUserMenuLogic) QueryUserMenu() (resp *types.UserMenuResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	var r = &types.UserMenuResp{}
+	menus, sqlResult := l.svcCtx.MenuDao.GetUserMenu()
+	if sqlResult.Error != nil {
+		return nil, errx.NewErrCode(errx.DbError)
+	}
+	for _, v := range menus {
+		var menuResp types.MenuResp
+		copier.Copy(&menuResp, &v)
+		menuResp.CreatedAt = v.CreatedAt.UnixMilli()
+		menuResp.UpdatedAt = v.UpdatedAt.UnixMilli()
+		r.Menus = append(r.Menus, &menuResp)
+	}
+	return r, nil
 }
