@@ -107,7 +107,7 @@ type MenuAddReq struct {
 	Name        string `json:"name"`
 	Url         string `json:"url"`
 	Sort        int    `json:"sort"`
-	Icon        int    `json:"icon"`
+	Icon        string `json:"icon,optional"`
 	Description string `json:"description,optional"`
 }
 

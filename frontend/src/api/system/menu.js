@@ -7,12 +7,27 @@ export function fetchTree (data) {
 
 // 新建
 export function create (data) {
-  return request.post('/sys/permission/add', data)
+  return request.post('/sys/menu/add', data)
 }
 
 // 修改
 export function updateById (data) {
-  return request.post('/sys/permission/edit', data)
+  return request.post('/sys/menu/edit', data)
+}
+
+
+// 删除
+export function deleteById (id) {
+  return request.delete(`/sys/menu/removeById?id=${id}`)
+}
+
+// 批量删除
+export function deleteByIdInBatch (ids) {
+  return request.get('/sys/menu/removeByIds', {
+    params: {
+      ids
+    }
+  })
 }
 
 // 修改状态
@@ -20,19 +35,6 @@ export function updateStatus (data) {
   return request.post('/system/menu/updateStatus', data)
 }
 
-// 删除
-export function deleteById (id) {
-  return request.delete(`/sys/permission/delete?id=${id}`)
-}
-
-// 批量删除
-export function deleteByIdInBatch (ids) {
-  return request.get('/sys/permission/deleteBatch', {
-    params: {
-      ids
-    }
-  })
-}
 
 // 查询菜单树
 export function fetchMenuTree () {

@@ -15,32 +15,39 @@
       <el-form-item v-if="form.menuType != 0" label="上级菜单" prop="parentId">
         <MenuSelect v-if="visible" v-model="form.parentId" placeholder="请选择上级菜单" :exclude-id="excludeMenuId" clearable :inline="false" />
       </el-form-item>
+
       <el-form-item :label="form.menuType != 2 ? '菜单名称' : '按钮/权限'" prop="name" required>
         <el-input v-model="form.name" :placeholder="
             form.menuType != 2 ? '请输入菜单名称' : '请输入按钮/权限'
           " v-trim maxlength="50" />
       </el-form-item>
+
       <el-form-item v-if="form.menuType == 2" label="授权标识" prop="perms">
         <el-input v-model="form.perms" placeholder="请输入授权标识" v-trim maxlength="200" />
       </el-form-item>
+
       <el-form-item v-if="form.menuType == 2" label="授权策略">
         <el-radio-group v-model="form.permsType">
           <el-radio style="margin-top: 10px;" label="1">可见/可访问(授权后可见/可访问)</el-radio><br />
           <el-radio style="margin-top: 10px;" label="2">可编辑(未授权时禁用)</el-radio>
         </el-radio-group>
       </el-form-item>
+
       <el-form-item v-if="form.menuType == 2" label="状态">
         <el-radio-group v-model="form.status">
           <el-radio label="0">无效</el-radio>
           <el-radio label="1">有效</el-radio>
         </el-radio-group>
       </el-form-item>
+
       <el-form-item v-if="form.menuType != 2" label="访问路径" prop="url">
         <el-input v-model="form.url" placeholder="请输入访问路径" v-trim maxlength="200" />
       </el-form-item>
+
       <el-form-item v-if="form.menuType != 2" label="排序" prop="url">
-        <el-input-number style="width: 150px;" v-model="form.sortNo" :min="1" :max="100"></el-input-number>
+        <el-input-number style="width: 150px;" v-model="form.sort" :min="1" :max="100"></el-input-number>
       </el-form-item>
+
       <el-form-item v-if="form.menuType != 2" label="图标" prop="icon" class="form-item-icon">
         <el-radio-group v-model="form.icon">
           <el-radio :label="icon" v-for="icon in icons" :key="icon">
@@ -48,6 +55,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
+
       <el-form-item label="备注" prop="description">
         <el-input type="textarea" v-model="form.description" placeholder="请输入菜单备注" v-trim :rows="3" maxlength="500" />
       </el-form-item>
@@ -75,21 +83,16 @@ export default {
       form: {
         id: undefined,
         parentId: undefined,
-        component: "layouts/RouteView",
         url: "",
         name: "",
         icon: "",
         description: "",
-        perms: undefined,
-        permsType: "1",
-        status: "1",
-        menuType: 0,
-        sortNo: 1,
-        route: true,
-        keepAlive: false,
-        internalOrExternal: false,
-        hidden: false,
-        alwaysShow: false,
+        sort: 1,
+        // route: true,
+        // keepAlive: false,
+        // internalOrExternal: false,
+        // hidden: false,
+        // alwaysShow: false,
       },
       // 验证规则
       rules: {
@@ -113,21 +116,16 @@ export default {
       this.form = {
         id: undefined,
         parentId: undefined,
-        component: "layouts/RouteView",
         url: "",
         name: "",
         icon: "",
         description: "",
-        perms: undefined,
-        permsType: "1",
-        status: "1",
-        menuType: 0,
-        sortNo: 1,
-        route: true,
-        keepAlive: false,
-        internalOrExternal: false,
-        hidden: false,
-        alwaysShow: false,
+        sort: 1,
+        // route: true,
+        // keepAlive: false,
+        // internalOrExternal: false,
+        // hidden: false,
+        // alwaysShow: false,
       };
     },
     /**
