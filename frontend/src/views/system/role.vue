@@ -1,5 +1,5 @@
 <template>
-  <TableLayout :permissions="['system:roleUserList:query']">
+  <TableLayout>
   <!-- <TableLayout> -->
     <!-- 搜索表单 -->
     <div slot="search-form">
@@ -63,19 +63,19 @@
         @sort-change="handleSortChange"
       >
         <el-table-column
-          prop="roleCode"
+          prop="code"
           label="角色编码"
           fixed="left"
           min-width="100px"
         ></el-table-column>
         <el-table-column
-          prop="roleName"
+          prop="name"
           label="角色名称"
           fixed="left"
           min-width="100px"
         ></el-table-column>
         <el-table-column
-          prop="createTime"
+          prop="createdAt"
           label="创建时间"
           min-width="140px"
         ></el-table-column>

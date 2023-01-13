@@ -93,14 +93,29 @@ type RoleResp struct {
 	Name        string `json:"name"`
 	Code        string `json:"code"`
 	Description string `json:"description"`
-	CreatedBy   int64  `json:"created_by"`
-	CreatedAt   int64  `json:"created_at"`
-	UpdatedBy   int64  `json:"updated_by"`
-	UpdatedAt   int64  `json:"updated_at"`
+	CreatedBy   int64  `json:"createdBy"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedBy   int64  `json:"updatedBy"`
+	UpdatedAt   string `json:"updatedAt"`
 }
 
-type RoleListResp struct {
-	RoleList []*RoleResp `json:"roleList"`
+type RolePageReq struct {
+	Current     int    `form:"current,optional"`
+	Size        int    `form:"size,optional"`
+	Name        string `form:"name,optional"`
+	Code        string `form:"code,optional"`
+	Description string `form:"description,optional"`
+	CreatedBy   int64  `form:"createdBy,optional"`
+	CreatedAt   string `form:"createdAt,optional"`
+	UpdatedBy   int64  `form:"updatedBy,optional"`
+	UpdatedAt   string `form:"updatedAt,optional"`
+}
+
+type RolePageResp struct {
+	Current int         `json:"current"`
+	Size    int         `json:"size"`
+	Total   int64       `json:"total"`
+	Records []*RoleResp `json:"records"`
 }
 
 type MenuAddReq struct {

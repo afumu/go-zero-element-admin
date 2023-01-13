@@ -161,8 +161,8 @@ export default {
           .LocationList({
             order: 'desc',
             column: 'createTime',
-            pageNo: this.tableData.pagination.pageIndex,
-            pageSize: this.tableData.pagination.pageSize,
+            current: this.tableData.pagination.pageIndex,
+            size: this.tableData.pagination.pageSize,
             ...this.searchForm,
           })
           .then((data) => {

@@ -2,8 +2,11 @@ package role
 
 import (
 	"context"
+	"github.com/acmestack/gorm-plus/gplus"
 	"github.com/jinzhu/copier"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/utils"
+	"github.com/zouchangfu/go-zero-element-admin/internal/model"
 
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
@@ -25,20 +28,17 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 	}
 }
 
-func (l *ListLogic) List() (resp *types.RoleListResp, err error) {
-	allRoles, sqlResult := l.svcCtx.RoleDao.ListAll()
+func (l *ListLogic) List(req *types.RolePageReq) (resp *types.RolePageResp, err error) {
+	page := gplus.NewPage[model.SysRole](req.Current, req.Size)
+	pageResult, sqlResult := l.svcCtx.RoleDao.PageAll(page)
 	if sqlResult.Error != nil {
 		return nil, errx.NewErrCode(errx.DbError)
 	}
 
-	var roles []*types.RoleResp
-	for _, u := range allRoles {
-		roleResp := types.RoleResp{}
-		copier.Copy(&roleResp, &u)
-		roleResp.CreatedAt = u.CreatedAt.UnixMilli()
-		roleResp.UpdatedAt = u.UpdatedAt.UnixMilli()
-		roles = append(roles, &roleResp)
+	var rolePageResp types.RolePageResp
+	if err := copier.CopyWithOption(&rolePageResp, &pageResult, utils.CovertTimeToString()); err != nil {
+		return nil, errx.NewErrCode(errx.ServerCommonError)
 	}
 
-	return &types.RoleListResp{RoleList: roles}, nil
+	return &rolePageResp, nil
 }
