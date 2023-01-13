@@ -8,6 +8,9 @@ info(
 
 import "common.api"
 type (
+
+
+
 	MenuAddReq {
 		Name        string `json:"name"`
 		Url         string `json:"url"`
@@ -26,19 +29,21 @@ type (
 
 	MenuResp {
 		Id          int64  `json:"id"`
+		ParentId    int64  `json:"parentId"`
 		Name        string `json:"name"`
 		Url         string `json:"url"`
 		Sort        int `json:"sort"`
 		Icon        string `json:"icon"`
 		Description string `json:"description"`
-		CreatedBy   int64  `json:"created_by"`
-		CreatedAt   int64  `json:"created_at"`
-		UpdatedBy   int64  `json:"updated_by"`
-		UpdatedAt   int64  `json:"updated_at"`
+		CreatedBy   int64  `json:"createdBy"`
+		CreatedAt   string  `json:"createdAt"`
+		UpdatedBy   int64  `json:"updatedBy"`
+		UpdatedAt   string  `json:"updatedAt"`
+		Children     []*MenuResp `json:"children"`
 	}
 
 	MenuListResp {
-		MenuList []*MenuResp `json:"menuList"`
+        MenuList []*MenuResp `json:"menuList"`
 	}
 
     UserMenuResp {
@@ -56,24 +61,24 @@ type (
 service core {
 	@doc "菜单列表"
 	@handler list
-	get /sys/menu/list returns (MenuListResp)
-	
+	get /sys/menu/list  returns (MenuListResp)
+
 	@doc "添加菜单"
 	@handler add
 	post /sys/menu/add (MenuAddReq)
-	
+
 	@doc "根据Id查询菜单"
 	@handler queryById
 	get /sys/menu/queryById (FormParamId) returns (MenuResp)
-	
+
 	@doc "编辑菜单"
 	@handler edit
 	put /sys/menu/edit (MenuEditReq)
-	
+
 	@doc "根据Id删除菜单"
 	@handler removeById
 	delete /sys/menu/removeById (FormParamId)
-	
+
 	@doc "批量删除菜单"
 	@handler removeByIds
 	delete /sys/menu/removeByIds (FormParamIds)

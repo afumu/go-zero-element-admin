@@ -8,7 +8,7 @@ import (
 
 type SysMenu struct {
 	Id          int64     // 标识
-	ParentId    string    // 父标识
+	ParentId    int64     // 父标识
 	Name        string    // 菜单名称
 	Url         string    // 菜单路径
 	Sort        int       // 菜单排序

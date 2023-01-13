@@ -120,16 +120,18 @@ type MenuEditReq struct {
 }
 
 type MenuResp struct {
-	Id          int64  `json:"id"`
-	Name        string `json:"name"`
-	Url         string `json:"url"`
-	Sort        int    `json:"sort"`
-	Icon        string `json:"icon"`
-	Description string `json:"description"`
-	CreatedBy   int64  `json:"created_by"`
-	CreatedAt   int64  `json:"created_at"`
-	UpdatedBy   int64  `json:"updated_by"`
-	UpdatedAt   int64  `json:"updated_at"`
+	Id          int64       `json:"id"`
+	ParentId    int64       `json:"parentId"`
+	Name        string      `json:"name"`
+	Url         string      `json:"url"`
+	Sort        int         `json:"sort"`
+	Icon        string      `json:"icon"`
+	Description string      `json:"description"`
+	CreatedBy   int64       `json:"createdBy"`
+	CreatedAt   string      `json:"createdAt"`
+	UpdatedBy   int64       `json:"updatedBy"`
+	UpdatedAt   string      `json:"updatedAt"`
+	Children    []*MenuResp `json:"children"`
 }
 
 type MenuListResp struct {

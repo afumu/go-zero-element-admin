@@ -46,7 +46,7 @@ export default {
       if (menuConfig == null) {
         return null
       }
-      return menuConfig.path
+      return menuConfig.url
     },
     // 默认展开的菜单index
     defaultOpeneds () {
@@ -58,27 +58,29 @@ export default {
     handleSelect (menuIndex) {
       const menuConfig = this.__getMenuConfig(
         menuIndex,
-        'path',
+        'url',
         this.menuData.list
       )
+      console.info("menuIndex",menuIndex)
+      console.info("menuConfig",menuConfig)
       // 找不到页面
       try {
-        require('@/views' + menuConfig.path)
+        require('@/views' + menuConfig.url)
       } catch (e) {
         this.$tip.error(
           '未找到页面文件@/views' +
-            menuConfig.path +
+            menuConfig.url +
             '.vue，请检查菜单路径是否正确'
         )
       }
       // 点击当前菜单不做处理
-      if (menuConfig.path === this.$route.path) {
+      if (menuConfig.url === this.$route.path) {
         return
       }
-      if (menuConfig.path == null || menuConfig.path.trim().length === 0) {
+      if (menuConfig.url == null || menuConfig.url.trim().length === 0) {
         return
       }
-      this.$router.push(menuConfig.path)
+      this.$router.push(menuConfig.url)
     },
     // 获取菜单配置
     __getMenuConfig (value, key, menus) {

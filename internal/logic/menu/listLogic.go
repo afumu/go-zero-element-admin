@@ -4,9 +4,9 @@ import (
 	"context"
 	"github.com/jinzhu/copier"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
-
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,15 +30,21 @@ func (l *ListLogic) List() (resp *types.MenuListResp, err error) {
 	if sqlResult.Error != nil {
 		return nil, errx.NewErrCode(errx.DbError)
 	}
-
 	var menus []*types.MenuResp
 	for _, u := range allMenus {
 		menuResp := types.MenuResp{}
 		copier.Copy(&menuResp, &u)
-		menuResp.CreatedAt = u.CreatedAt.UnixMilli()
-		menuResp.UpdatedAt = u.UpdatedAt.UnixMilli()
+		tm1 := time.UnixMilli(u.CreatedAt.UnixMilli())
+		menuResp.CreatedAt = tm1.Format("2006-01-02 15:04:05")
+
+		if u.UpdatedAt.UnixMilli() > 0 {
+			tm2 := time.UnixMilli(u.UpdatedAt.UnixMilli())
+			menuResp.UpdatedAt = tm2.Format("2006-01-02 15:04:05")
+		}
+
 		menus = append(menus, &menuResp)
 	}
 
-	return &types.MenuListResp{MenuList: menus}, nil
+	childrenMenus := BuildChildrenMenus(menus)
+	return &types.MenuListResp{MenuList: childrenMenus}, nil
 }

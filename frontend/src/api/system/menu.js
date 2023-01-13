@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 // 查询
 export function fetchTree (data) {
-  return request.get('/sys/permission/list', data)
+  return request.get('/sys/menu/list', data)
 }
 
 // 新建

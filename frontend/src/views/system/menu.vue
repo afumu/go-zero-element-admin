@@ -1,5 +1,5 @@
 <template>
-  <TableLayout class="menu-layout" :permissions="['system:permission:query']">
+  <TableLayout class="menu-layout">
      <!-- <TableLayout class="menu-layout"> -->
     <!-- 表格和分页 -->
     <template v-slot:table-wrap>
@@ -27,10 +27,10 @@
           </template>
         </el-table-column>
         <el-table-column prop="url" label="访问路径" min-width="140px"></el-table-column>
-        <el-table-column prop="sortNo" label="排序" min-width="50px"></el-table-column>
+        <el-table-column prop="sort" label="排序" min-width="50px"></el-table-column>
         <el-table-column prop="description" label="备注" min-width="140px"></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" min-width="140px"></el-table-column>
-        <el-table-column prop="updateTime" label="更新时间" min-width="140px"></el-table-column>
+        <el-table-column prop="createdAt" label="创建时间" min-width="140px"></el-table-column>
+        <el-table-column prop="updatedAt" label="更新时间" min-width="140px"></el-table-column>
         <el-table-column label="操作" min-width="220" align="center" fixed="right">
           <template slot-scope="{ row }">
             <el-button style="margin-left: 0;!important" type="text" icon="el-icon-edit" @click="$refs.operaMenuWindow.open('编辑菜单', row)">编辑</el-button>
@@ -67,7 +67,8 @@ export default {
       this.isWorking.search = true;
       fetchTree()
         .then((records) => {
-          this.tableData.list = records;
+          console.info('----------------records-----------',records)
+          this.tableData.list = records.menuList;
           // console.log('this.tableData.list', this.tableData.list)
         })
         .catch((e) => {
