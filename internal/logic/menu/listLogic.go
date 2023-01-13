@@ -3,12 +3,11 @@ package menu
 import (
 	"context"
 	"github.com/jinzhu/copier"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zouchangfu/go-zero-element-admin/internal/common/errx"
+	"github.com/zouchangfu/go-zero-element-admin/internal/common/utils"
 	"github.com/zouchangfu/go-zero-element-admin/internal/svc"
 	"github.com/zouchangfu/go-zero-element-admin/internal/types"
-	"time"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type ListLogic struct {
@@ -33,15 +32,7 @@ func (l *ListLogic) List() (resp *types.MenuListResp, err error) {
 	var menus []*types.MenuResp
 	for _, u := range allMenus {
 		menuResp := types.MenuResp{}
-		copier.Copy(&menuResp, &u)
-		tm1 := time.UnixMilli(u.CreatedAt.UnixMilli())
-		menuResp.CreatedAt = tm1.Format("2006-01-02 15:04:05")
-
-		if u.UpdatedAt.UnixMilli() > 0 {
-			tm2 := time.UnixMilli(u.UpdatedAt.UnixMilli())
-			menuResp.UpdatedAt = tm2.Format("2006-01-02 15:04:05")
-		}
-
+		copier.CopyWithOption(&menuResp, &u, utils.CovertTimeToString())
 		menus = append(menus, &menuResp)
 	}
 
