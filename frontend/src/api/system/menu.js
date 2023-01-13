@@ -12,7 +12,7 @@ export function create (data) {
 
 // 修改
 export function updateById (data) {
-  return request.post('/sys/menu/edit', data)
+  return request.put('/sys/menu/edit', data)
 }
 
 

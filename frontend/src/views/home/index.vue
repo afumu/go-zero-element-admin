@@ -1,7 +1,7 @@
 <template>
     <!-- <TableLayout> -->
-       <div class="home">
-         <h2>home</h2>
+       <div style="margin-left: 10px"  class="home">
+         <h2>这是一个很漂亮的首页（聪明人才能发现）</h2>
        </div>
     <!-- </TableLayout> -->
 </template>

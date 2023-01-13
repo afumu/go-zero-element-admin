@@ -50,7 +50,7 @@ export default {
       fetchTree()
         .then((records) => {
           this.data = []
-          this.__fillData(this.data, records)
+          this.__fillData(this.data, records.menuList)
         })
         .catch((e) => {
           this.$tip.apiFailed(e)

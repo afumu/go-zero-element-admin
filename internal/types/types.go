@@ -104,6 +104,7 @@ type RoleListResp struct {
 }
 
 type MenuAddReq struct {
+	ParentId    int64  `json:"parentId"`
 	Name        string `json:"name"`
 	Url         string `json:"url"`
 	Sort        int    `json:"sort"`
@@ -113,9 +114,11 @@ type MenuAddReq struct {
 
 type MenuEditReq struct {
 	Id          int64  `json:"id"`
+	ParentId    int64  `json:"parentId"`
+	Name        string `json:"name"`
 	Url         string `json:"url"`
 	Sort        int    `json:"sort"`
-	Icon        int    `json:"icon"`
+	Icon        string `json:"icon,optional"`
 	Description string `json:"description,optional"`
 }
 

@@ -4,51 +4,24 @@
       为 <em>{{ parentName }}</em> 新建子菜单
     </p>
     <el-form :model="form" ref="form" :rules="rules">
-      <el-form-item>
-        <el-radio-group v-model="form.menuType">
-          <el-radio :label="0">一级菜单</el-radio>
-          <el-radio :label="1">子菜单</el-radio>
-          <el-radio :label="2">按钮/权限</el-radio>
-        </el-radio-group>
-      </el-form-item>
 
-      <el-form-item v-if="form.menuType != 0" label="上级菜单" prop="parentId">
+      <el-form-item v-if="isAddSubMenu" label="上级菜单" prop="parentId">
         <MenuSelect v-if="visible" v-model="form.parentId" placeholder="请选择上级菜单" :exclude-id="excludeMenuId" clearable :inline="false" />
       </el-form-item>
 
-      <el-form-item :label="form.menuType != 2 ? '菜单名称' : '按钮/权限'" prop="name" required>
-        <el-input v-model="form.name" :placeholder="
-            form.menuType != 2 ? '请输入菜单名称' : '请输入按钮/权限'
-          " v-trim maxlength="50" />
+      <el-form-item label="菜单名称" prop="name" required>
+        <el-input v-model="form.name" placeholder="请输入菜单名称" v-trim maxlength="50" />
       </el-form-item>
 
-      <el-form-item v-if="form.menuType == 2" label="授权标识" prop="perms">
-        <el-input v-model="form.perms" placeholder="请输入授权标识" v-trim maxlength="200" />
-      </el-form-item>
-
-      <el-form-item v-if="form.menuType == 2" label="授权策略">
-        <el-radio-group v-model="form.permsType">
-          <el-radio style="margin-top: 10px;" label="1">可见/可访问(授权后可见/可访问)</el-radio><br />
-          <el-radio style="margin-top: 10px;" label="2">可编辑(未授权时禁用)</el-radio>
-        </el-radio-group>
-      </el-form-item>
-
-      <el-form-item v-if="form.menuType == 2" label="状态">
-        <el-radio-group v-model="form.status">
-          <el-radio label="0">无效</el-radio>
-          <el-radio label="1">有效</el-radio>
-        </el-radio-group>
-      </el-form-item>
-
-      <el-form-item v-if="form.menuType != 2" label="访问路径" prop="url">
+      <el-form-item label="访问路径" prop="url">
         <el-input v-model="form.url" placeholder="请输入访问路径" v-trim maxlength="200" />
       </el-form-item>
 
-      <el-form-item v-if="form.menuType != 2" label="排序" prop="url">
+      <el-form-item label="排序" prop="url">
         <el-input-number style="width: 150px;" v-model="form.sort" :min="1" :max="100"></el-input-number>
       </el-form-item>
 
-      <el-form-item v-if="form.menuType != 2" label="图标" prop="icon" class="form-item-icon">
+      <el-form-item label="图标" prop="icon" class="form-item-icon">
         <el-radio-group v-model="form.icon">
           <el-radio :label="icon" v-for="icon in icons" :key="icon">
             <i :class="{ [icon]: true }"></i>
@@ -94,6 +67,7 @@ export default {
         // hidden: false,
         // alwaysShow: false,
       },
+      isAddSubMenu:false,
       // 验证规则
       rules: {
         name: [{ required: true, message: "请输入菜单名称" }],
@@ -138,12 +112,11 @@ export default {
       this.title = title;
       this.visible = true;
       if (parent) {
-        if (parent.menuType == 1) {
-          this.form.menuType = 2;
-        } else {
-          this.form.menuType = 1;
-        }
+        this.isAddSubMenu = true
+      }else {
+        this.isAddSubMenu = false
       }
+
       // 新建，menu为空时表示新建菜单
       if (target == null) {
         this.excludeMenuId = null;
